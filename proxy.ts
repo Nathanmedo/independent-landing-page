@@ -7,7 +7,7 @@ const wixClient = createClient({
     auth: OAuthStrategy({clientId: process.env.WIX_CLIENT_TOKEN!}),
 });
 
-export async function middleware(req:any){
+export async function proxy(req:any){
     const cookie = req.cookies;
 
     let sessionCookie = cookie.get(WIX_COOKIE_TOKEN);

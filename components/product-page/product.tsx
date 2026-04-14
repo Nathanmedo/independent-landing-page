@@ -72,7 +72,7 @@ function ProductSection() {
         {useCollections.map((collection, index) => (
           <div
             className={`${
-              index === 3 || index === 6 ? "col-span-2 lg:col-span-3" : ""
+              index === 3 || index === 6 ? "col-span-1 md:col-span-2 lg:col-span-3" : ""
             } overflow-hidden relative `}
           >
             <BentoGridItem
@@ -81,7 +81,7 @@ function ProductSection() {
               header={
                 <img
                   src={collection?.media?.mainMedia?.image?.url}
-                  className="h-[100%] object-cover"
+                  className="md:h-[100%] h-[220px] object-cover"
                   onError={() => <Skeleton />}
                 />
               }
