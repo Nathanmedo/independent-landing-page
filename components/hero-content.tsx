@@ -3,7 +3,7 @@ import { easeInOut, motion } from "framer-motion"
 
 export default function HeroContent() {
   return (
-    <main className="absolute bottom-8 left-8 z-20 max-w-lg">
+    <main className="absolute bottom-8 left-8 z-20 max-w-[1000px]">
       <div className="text-left">
         <motion.div
         initial={{opacity:0}}
@@ -27,15 +27,14 @@ export default function HeroContent() {
             <h1
             style={{mixBlendMode: "difference"}} 
             className="text-5xl md:text-6xl md:leading-16 tracking-tight font-light text-white mb-4">
-                <span className="font-medium italic instrument">Beautiful</span> Shader
+                <span>Get</span><span className="font-medium italic instrument"> High-Quality</span> Prints
                 <br />
-                <span className="font-light tracking-tight text-white">Experiences</span>
+                <span className="font-light tracking-tight text-white">Without Stress or Delays</span>
             </h1>
 
             {/* Description */}
-            <p className="text-xs font-light text-white/70 mb-4 leading-relaxed">
-                Create stunning visual experiences with our advanced shader technology. Interactive lighting, smooth
-                animations, and beautiful effects that respond to your every move.
+            <p className="text-xs font-light text-white/70 mb-4 leading-relaxed max-w-lg">
+                We supply durable flex, vinyl, and printing materials trusted by resellers and branding businesses — delivered fast and at competitive prices.
             </p>
 
             {/* Buttons */}
@@ -44,9 +43,10 @@ export default function HeroContent() {
                     Pricing
                 </button>
                 <button className="px-8 py-3 rounded-sm bg-white border-primary border-l-2 border-t-2 border-r-8 border-b-8 text-primary font-normal text-xs transition-all duration-200 hover:bg-white/90 cursor-pointer">
-                    Get Started
+                    Order Now
                 </button>
             </div>
+            <p className="text-xs text-white mt-2 leading-relaxed">Trusted by <strong>100+ printing businesses</strong></p>
         </motion.div>
       </div>
     </main>
