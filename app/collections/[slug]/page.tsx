@@ -94,7 +94,7 @@ export default async function CollectionPage({
 
   if (collectionProducts._items.length === 0) {
     return (
-      <section className="bg-primary/85">
+      <section className="bg-primary/95">
         <CollectionHero collection={collection} />
 
         <CollectionToolbar totalProducts={0} collectionName={collectionName} />

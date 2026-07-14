@@ -40,7 +40,7 @@ const CollectionCard = forwardRef<HTMLDivElement, Props>(
         <div className="mx-auto flex h-full max-w-7xl flex-col-reverse items-center justify-between px-6 py-12 sm:px-8 lg:h-full lg:flex-row lg:px-20 lg:py-0">
           {/* LEFT */}
 
-          <div className="w-full text-center lg:w-[50%] lg:text-left">
+          <div className="w-full flex md:items-start-start items-center flex-col text-center lg:w-[50%] lg:text-left">
             <p className="product-number mb-6 text-sm uppercase tracking-[.5em] text-white lg:mb-8">
               {String(index + 1).padStart(2, "0")}
             </p>
@@ -55,7 +55,7 @@ const CollectionCard = forwardRef<HTMLDivElement, Props>(
 
             <button
               onClick={handleViewCollection}
-              className="product-button mt-10 flex items-center gap-3 border-2 border-white px-6 py-4 uppercase tracking-[.3em] text-white transition-all duration-150 hover:bg-white hover:text-primary/95 lg:mt-14"
+              className="product-button md:mt-10 mt-5 flex items-center gap-3 border-2 border-white px-6 py-4 uppercase tracking-[.3em] text-white transition-all duration-150 hover:bg-white hover:text-primary/95 lg:mt-14"
             >
               Explore
               <ArrowUpRight

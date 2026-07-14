@@ -34,7 +34,7 @@ export function ProductPrice({product, selectedVariant}:{product: any; selectedV
   const hasDiscount = priceOption?.price !== priceOption?.discountedPrice;
   
    return <div className="text-3xl tracking-tight text-white flex-col flex justify-center">
-     <span className={cn('bg-muted max-w-fit bg-opacity-50 px-2 py-1 text-white font-extrabold flex items-center', hasDiscount && 'font-normal line-through text-muted-foreground text-sm')}>{priceOption?.formatted?.price}</span>
+     <span className={cn('bg-muted max-w-fit bg-opacity-50  py-1 text-white font-extrabold flex items-center', hasDiscount && 'font-normal line-through text-muted-foreground text-sm')}>{priceOption?.formatted?.price}</span>
 
      {hasDiscount && <span>{priceOption.formatted.discountedPrice}</span>}
   </div>

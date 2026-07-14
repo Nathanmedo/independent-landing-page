@@ -43,9 +43,9 @@ export default function CollectionToolbar({
 
 
   return (
-    <section className="mx-auto mb-24 max-w-7xl px-6">
+    <section className="mx-auto mb-18 max-w-7xl px-6">
 
-      <div className="flex flex-col gap-8 border-y border-white/80 py-8 md:flex-row md:items-center md:justify-between">
+      <div className="flex  gap-8 border-y border-white/80 py-8 flex-row items-center md:justify-between">
 
         <div className="flex flex-1 items-center gap-4">
 

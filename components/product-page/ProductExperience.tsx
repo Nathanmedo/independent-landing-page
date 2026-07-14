@@ -64,7 +64,7 @@ export default function ProductExperience({
   return (
     <section
       style={{
-        height: `${collections.length * 116.57}vh`,
+        height: `${collections.length * 116.57}dvh`,
       }}
     >
       <div
@@ -73,7 +73,7 @@ export default function ProductExperience({
       >
         {/* Progress */}
 
-        <div className="absolute left-12 top-1/2 z-50 -translate-y-1/2 space-y-4">
+        <div className="absolute md:left-12 left-8 top-1/2 z-50 -translate-y-1/2 space-y-4">
           {collections.map((_, index) => (
             <div
               key={index}

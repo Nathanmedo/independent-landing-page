@@ -28,9 +28,9 @@ const container = {
 
 export default function AboutSectionTwo() {
   return (
-    <main className="bg-primary/85 px-6 py-52">
+    <main className="bg-primary/85 px-6 md:py-52 py-30">
 
-      <div className="grid gap-24 lg:grid-cols-2">
+      <div className="grid md:gap-24 gap-20 lg:grid-cols-2">
 
         <motion.div
           variants={container}
@@ -72,9 +72,9 @@ export default function AboutSectionTwo() {
             <motion.div
               key={text}
               variants={fadeUp}
-              className="group border-l border-neutral-500 pl-8 transition-colors duration-300 hover:border-white"
+              className="group border-l border-neutral-500 md:pl-8 pl-4 transition-colors duration-300 hover:border-white"
             >
-              <p className="text-2xl leading-relaxed text-neutral-300 transition-colors duration-300 group-hover:text-white">
+              <p className="md:text-2xl text-md leading-relaxed text-neutral-300 transition-colors duration-300 group-hover:text-white">
                 {text}
               </p>
             </motion.div>

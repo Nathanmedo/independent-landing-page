@@ -33,7 +33,7 @@ export default function ShaderShowcase() {
   return (
     <main>
       <section id="hero">
-        <div className="min-h-screen py-3 relative overflow-hidden bg-animated-gradient px-6">
+        <div className="min-h-fit py-3 relative overflow-hidden bg-animated-gradient px-6">
           <Header />
           <HeroContent collections={collections} />
         </div>

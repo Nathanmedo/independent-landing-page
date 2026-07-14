@@ -43,7 +43,7 @@ export default function CollectionHero({
       variants={container}
       initial="hidden"
       animate="show"
-      className="mx-auto max-w-7xl px-6 pt-24 pb-20"
+      className="mx-auto max-w-7xl px-6 pt-24 md:pb-20 pb-10"
     >
       <div
         className="text-xs flex items-center gap-2 uppercase tracking-[0.45em] text-neutral-200"

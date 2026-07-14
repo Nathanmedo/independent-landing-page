@@ -10,7 +10,7 @@ export default function HeroContent({ collections }: HeroContentProps) {
   return (
     <main className=" flex flex-col justify-center ">
       <div className="max-w-7xl">
-        <p className="mb-6 text-sm uppercase tracking-[0.45em] text-neutral-500">
+        <p className="mb-6 mt-10 text-sm uppercase tracking-[0.45em] text-neutral-500">
           Independent Chemicals.NIG
         </p>
 
@@ -38,13 +38,13 @@ export default function HeroContent({ collections }: HeroContentProps) {
         </div>
       </div>
 
-      <div className="mt-20 flex flex-wrap gap-10  text-sm uppercase tracking-[0.1em] text-neutral-500">
+      <div className="md:my-20 my-15 flex flex-wrap gap-5 text-sm uppercase tracking-[0.1em] text-neutral-500">
         {collections.map((collection, index) => {
           const productName = collection?.name?.split("-");
           return (
             <Link
               className="hover:text-neutral-200 hover:underline transition-all duration-150"
-              href={`#${collection._id}`}
+              href={`/collections/${collection?.slug}`}
               key={index}
             >
               {productName[0]}

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { findVariant, ProductPrice } from "@/lib/utils";
 import { products } from "@wix/stores";
@@ -13,6 +14,8 @@ import ProductOptions from "./ProductOptions";
 export default function ProductDetails({ productInfo }: any) {
   const [product, setProduct] = useState(null) as any;
   const [quantity, setQuantity] = useState(0);
+
+  const router = useRouter();
 
   const [selectedOptions, setSelectedOptions] = useState(
     productInfo.productOptions
@@ -44,8 +47,18 @@ export default function ProductDetails({ productInfo }: any) {
   const productImage = productInfo?.media?.mainMedia?.image;
 
   return (
-    <div className="bg-primary/95">
-      <div className="mx-auto mb-10 max-w-7xl px-4 pt-28 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+    <div className="bg-primary/95 min-h-screen">
+      <div className="mx-auto  max-w-7xl px-4 pt-28 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+        <div className="mb-10">
+          <button
+            onClick={() => router.back()}
+            className="group inline-flex cursor-pointer items-center gap-3 text-sm tracking-[0.2em] uppercase text-neutral-400 transition-colors hover:text-white"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+
+            <span>Back</span>
+          </button>
+        </div>
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
           {/* Image gallery */}
           <div className="top-14">
@@ -89,7 +102,7 @@ export default function ProductDetails({ productInfo }: any) {
                 <p className="sr-only">4 out of 5 stars</p>
                 <a
                   href="#"
-                  className="ml-3 text-md font-medium text-indigo-600 hover:text-indigo-500"
+                  className="ml-3 text-md font-medium text-neutral-300 hover:text-indigo-500"
                 >
                   117 reviews
                 </a>

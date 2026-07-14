@@ -253,7 +253,6 @@ export default function ContactForm() {
           {isSubmitting ? "Sending..." : "Send Message →"}
         </Button>
       </form>
-      <div>OR call {PHONE_NUMBER}</div>
     </Form>
   );
 }
