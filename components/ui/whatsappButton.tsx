@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { PHONE_NUMBER } from "@/lib/wix-api/constants";
 
-const MESSAGE = "I want to make an order.";
+const MESSAGE = "Hello Independent Chemicals.NIG,\nI'm interested in your printing materials and would like to make an enquiry. Please share more information about your products and pricing. \nThank you.";
 
 export default function WhatsAppButton() {
   const [visible, setVisible] = useState(false);

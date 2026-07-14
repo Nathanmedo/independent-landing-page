@@ -83,7 +83,7 @@ export const metadata: Metadata = {
 
     images: [
       {
-        url: "/icn-logo.jpg",
+        url: "/images/icn-logo.jpg",
 
         width: 1200,
 
