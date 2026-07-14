@@ -33,11 +33,71 @@ const inter = Inter({ subsets: ["latin"], weight: ["300","400","600"], display: 
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | Independent Chemical Enterprise",
+    template: "%s | Independent Chemical NIG. ENT. | | Premium Printing Materials, Machinery & Supplies",
     absolute: "Independent Chemical Enterprise",
   },
-  description: "Created with v0",
-  generator: "Next.js",
+  applicationName:"Independent Chemical NIG. ENT.",
+  description: "Independent Chemicals.NIG is a trusted supplier of premium printing materials, screen printing supplies, DTF products, heat transfer vinyl (HTV), printing machinery and accessories. Serving businesses across Nigeria, West Africa and beyond for nearly two decades.",
+  keywords: [
+  "Independent Chemicals",
+  "Independent Chemicals Nigeria",
+  "printing materials",
+  "printing supplies",
+  "printing machinery",
+  "printing equipment",
+  "screen printing",
+  "screen printing supplies",
+  "screen printing ink",
+  "screen printing mesh",
+  "mesh supplier",
+  "heat transfer vinyl",
+  "HTV",
+  "Plotter",
+  "Retarder",
+  "Seritex",
+  "HTV Nigeria",
+  "DTF supplies",
+  "DTF ink",
+  "DTF film",
+  "DTF powder",
+  "printing accessories",
+  "printing chemicals",
+  "squeegee",
+  "textile printing",
+  "garment branding",
+  "commercial printing",
+  "large format printing",
+  "printing business",
+  "printing supplier Nigeria",
+  "printing materials Lagos",
+  "printing machinery Lagos",
+  "printing supplies Nigeria",
+],
+  category: "Business",
+  openGraph: {
+    title: "Premium Printing Materials & Machinery | Independent Chemical NIG. ENT.",
+    description: "Discover premium printing materials, DTF supplies, HTV, printing machinery and accessories trusted by professionals across Nigeria, West Africa and beyond.",
+    url: "https://independentchemnig.com",
+
+    siteName: "Independent Chemical NIG. ENT.",
+
+    images: [
+      {
+        url: "/icn-logo.jpg",
+
+        width: 1200,
+
+        height: 630,
+
+        alt: "Independent Chemical NIG. ENT.",
+      },
+    ],
+
+    locale: "en_US",
+
+    type: "website",
+  },
+
 }
 
 export default function RootLayout({

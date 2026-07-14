@@ -43,8 +43,10 @@ export async function generateMetadata({ params }: MetadataProps) {
   }
 
   return {
-    title: `${collection.name} | Independent Chemicals.NIG`,
-    description: collection.description ?? "Browse our products.",
+    title: `${collection.name} | Independent Chemicals NIG. ENT.`,
+    description:
+      collection.description ??
+      `Browse our premium ${collection.name} collection. Trusted printing materials and supplies from Independent Chemicals.NIG.`,
   };
 }
 
@@ -129,7 +131,7 @@ export default async function CollectionPage({
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
             {collectionProducts._items.map((product: any, index: number) => (
-                <ProductCard key={product._id} product={product} />
+              <ProductCard key={product._id} product={product} />
             ))}
           </div>
           <div className="col-span-3 mt-4 w-full">
