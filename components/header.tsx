@@ -12,14 +12,13 @@ export default function Header() {
   const navLinks = [
     { label: "Home", href: "#hero" },
     { label: "Products", href: "#products" },
-  { label: "Faqs", href: "#Faqs" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ];
 
   return (
-    <header className="relative  flex items-center justify-center p-6 z-[100]">
-      <div className="bg-white/10 backdrop-blur-md rounded-xl px-4 py-2 shadow-sm w-[95%] flex items-center justify-between">
+    <header className="relative  flex items-center justify-center z-[100]">
+      <div className=" mb-3  w-[100%] flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/">
@@ -27,11 +26,11 @@ export default function Header() {
               initial="initial"
               animate="animate"
               transition={{ repeat: 0 }}
-              className="w-12 h-12 flex items-center justify-center"
+              className="w-12 h-12 flex items-center space-x-2"
             >
               <motion.img
                 animate={{
-                  x: [0, 0, 0, 0, 0, 0, 0, 40],
+                  x: [0, 0, 0, 0, 0, 0, 0, 60],
                   rotate: [0, 45, 360, 90, 270, 0],
                   scale: [1, 1.2, 1, 0.8, 1],
                   borderRadius: [0, 20, 40, 0, 50],
@@ -39,12 +38,12 @@ export default function Header() {
                 transition={{ duration: 5, ease: "easeInOut" }}
                 src={"/images/icn-logo.jpg"}
                 alt="Logo"
-                className="rounded-full w-3/4 h-3/4"
+                className="rounded-full w-8 h-8"
               />
               <motion.div
-                animate={{ opacity: [0, 1], x: [0, -20] }}
+                animate={{ opacity: [0, 1], x: [0, -40] }}
                 transition={{ duration: 1, ease: "easeOut", delay: 5 }}
-                className=" text-white/80 font-light instrument"
+                className=" text-white/80  text-sm uppercase tracking-[0.45em]"
               >
                 <p>ICN</p>
               </motion.div>
@@ -52,12 +51,12 @@ export default function Header() {
           </Link>
         </div>
         {/* Desktop Navigation (hidden on small screens) */}
-        <nav className="hidden md:flex items-center space-x-2 mix-blend-difference">
+        <nav className="hidden md:flex uppercase items-center space-x-2 mix-blend-difference">
           {navLinks.map((link) => (
             <Link
               key={link.label}
               href={link.href}
-              className="text-white/80 hover:text-white text-xs font-light px-3 py-2 rounded-full hover:bg-white/20 transition-all duration-200"
+              className="text-white/80 hover:font-semibold text-xs font-light px-3 py-2 rounded-full  transition-all duration-200"
             >
               {link.label}
             </Link>

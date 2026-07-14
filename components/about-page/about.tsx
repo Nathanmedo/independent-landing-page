@@ -1,98 +1,109 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
-import { motion, useAnimation } from "framer-motion";
-import Image from "next/image";
+import { motion } from "framer-motion";
 
-function AboutSection() {
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  },
+};
+
+const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+export default function AboutSection() {
   return (
-    <div className="h-[100%] lg:px-12 px-4 bg-primary-foreground lg:mx-6 mx-2">
-      <div className="relative max-w-[300px] mx-auto">
-        <h1 className="text-5xl md:text-6xl md:leading-16 tracking-tight w-full flex justify-center font-light text-white">
-          <motion.span
-            initial={{ opacity: 0 }}
-            viewport={{ amount: 0.2 }}
-            whileInView={{ opacity: 1 }}
-            className="font-medium mt-5 text-primary italic instrument"
+    <main className="bg-primary/90 px-6 py-40">
+
+      <motion.div
+        className="max-w-6xl"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.25 }}
+      >
+        <motion.p
+          variants={fadeUp}
+          className="mb-8 text-xs uppercase tracking-[0.45em] text-neutral-500"
+        >
+          WHY PROFESSIONALS TRUST US
+        </motion.p>
+
+        <motion.h2
+          variants={fadeUp}
+          className="max-w-5xl text-6xl font-semibold leading-[0.95] tracking-[-0.06em] text-white md:text-8xl xl:text-[8rem]"
+        >
+          Two decades.
+          <br />
+          One reputation.
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUp}
+          className="mt-10 max-w-2xl text-xl leading-relaxed text-neutral-400"
+        >
+          Nearly twenty years of supplying premium printing materials,
+          machinery and accessories to businesses across Nigeria,
+          West Africa and beyond.
+        </motion.p>
+      </motion.div>
+
+      <motion.div
+        className="mt-32 grid gap-16 md:grid-cols-2 xl:grid-cols-4"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        {[
+          {
+            number: "20+",
+            text: "Years of experience serving the printing industry.",
+          },
+          {
+            number: "10K+",
+            text: "Happy customers who trust our products.",
+          },
+          {
+            number: "15+",
+            text: "Countries reached through loyal customers and distributors.",
+          },
+          {
+            number: "100%",
+            text: "Genuine products from trusted manufacturers.",
+          },
+        ].map((item) => (
+          <motion.div
+            key={item.number}
+            variants={fadeUp}
+            className="group"
           >
-            How It Works
-          </motion.span>
-        </h1>
-        <motion.div
-          className="origin-left h-[4px] bg-primary w-full"
-          initial={{ scaleX: 0 }}
-          viewport={{ amount: 0.2 }}
-          whileInView={{ scaleX: 1 }}
-        ></motion.div>
-      </div>
-      {/* Content Section */}
-      <div className="w-full max-w-6xl mx-auto mt-12 rounded-3xl border-r-8 border-t-2 border-b-8 border-l-2 border-primary overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200 shadow-2xl">
-        <div className="grid md:grid-cols-2 gap-0 mt-2">
-          {/* Left Content Section */}
-          <div className="p-12 flex flex-col justify-center bg-white/40 backdrop-blur-sm">
-            <p className="text-sm font-medium text-gray-600 mb-3 tracking-wide">
-              Ready to Get Started?
+            <h3 className="text-6xl font-semibold tracking-[-0.05em] text-white transition-colors duration-300 group-hover:text-neutral-300">
+              {item.number}
+            </h3>
+
+            <p className="mt-4 text-neutral-400">
+              {item.text}
             </p>
-            <h2 className="text-5xl font-bold text-gray-900 mb-6 leading-tight">
-              Quick and easy steps
-            </h2>
-            <div className="text-gray-700 text-lg mb-8 leading-relaxed">
-              <strong>Steps:</strong>
-              <br />
-              <ol className="list-decimal marker:text-sm">
-                <li>
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">
-                      Choose Your Materials
-                    </span>
-                    <span className="text-[14px]">
-                      Browse our available flex, vinyl, and supplies
-                    </span>
-                  </div>
-                </li>
+          </motion.div>
+        ))}
+      </motion.div>
 
-                <li >
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">Place Your Order</span>
-                    <span className="text-[14px]">
-                      Quick and easy ordering process
-                    </span>
-                  </div>
-                </li>
-                <li >
-                  <div className="flex flex-col">
-                    <span className="font-bold text-sm">Get Fast Delivery</span>
-                    <span className="text-[14px]">
-                      Receive your materials on time, every time
-                    </span>
-                  </div>
-                </li>
-              </ol>
-            </div>
-            <div className="flex gap-4 flex-wrap">
-              <button className="w-full md:flex-1 md:min-w-0 px-8 py-3 bg-primary text-white rounded-lg border-gray-400 font-medium  hover:border-gray-500 transition-colors border-l-2 border-t-2 border-r-8 border-b-8">
-                Order Now
-              </button>
-              <button className="w-full md:flex-1 md:min-w-0 px-8 py-3 border-2 text-gray-700 rounded-lg font-medium hover:border-gray-400 hover:bg-primary/60 transition-colors border-primary border-l-2 border-t-2 border-r-8 border-b-8">
-                Learn More
-              </button>
-            </div>
-          </div>
-
-          {/* Right Image Section */}
-          <div className="relative bg-gradient-to-br from-slate-300 via-slate-200 to-blue-100 flex items-center justify-center">
-            <Image
-              src="/images/about-brand.png"
-              width={100}
-              height={100}
-              alt="a branded t-shirt "
-              className="absolute inset-0 w-[100%] h-[100%] object-fit"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   );
 }
-
-export default AboutSection;

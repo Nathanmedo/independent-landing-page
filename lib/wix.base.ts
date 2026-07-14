@@ -10,7 +10,7 @@ import { files } from "@wix/media";
 import { collections, products } from "@wix/stores";
 
 
-export function getWixClient(tokens: any) {
+export function getWixClient(tokens?: any) {
   return createClient({
     modules: {
       backInStockNotifications,

@@ -1,54 +1,57 @@
-import { easeInOut, motion } from "framer-motion"
+import { easeInOut, motion } from "framer-motion";
+import { ProductCategory } from "./product-page/types";
+import Link from "next/link";
 
+interface HeroContentProps {
+  collections: ProductCategory[];
+}
 
-export default function HeroContent() {
+export default function HeroContent({ collections }: HeroContentProps) {
   return (
-    <main className="absolute bottom-8 left-8 z-20 max-w-[1000px]">
-      <div className="text-left">
-        <motion.div
-        initial={{opacity:0}}
-        animate={{opacity:1}}
-        transition={{duration: .5, ease: easeInOut}}
-          className="inline-flex items-center px-3 py-2 relative"
-          style={{
-            filter: "url(#glass-effect)",
-          }}
-        >
-          <div className="absolute top-0 left-1 right-1 h-full  rounded-sm" />
-          <span className="text-white/90 text-xs font-light relative z-10 ">New Paper Shaders Experience</span>
-        </motion.div>
+    <main className=" flex flex-col justify-center ">
+      <div className="max-w-7xl">
+        <p className="mb-6 text-sm uppercase tracking-[0.45em] text-neutral-500">
+          Independent Chemicals.NIG
+        </p>
 
-        <motion.div
-        initial={{y:50, opacity:0 }}
-        animate={{y:0, opacity: 1}}
-        transition={{duration: 0.5, ease: "easeInOut"}}
-        className="opacity-100 translate-y-0">
-            {/* Main Heading */}
-            <h1
-            style={{mixBlendMode: "difference"}} 
-            className="text-5xl md:text-6xl md:leading-16 tracking-tight font-light text-white mb-4">
-                <span>Get</span><span className="font-medium italic instrument"> High-Quality</span> Prints
-                <br />
-                <span className="font-light tracking-tight text-white">Without Stress or Delays</span>
-            </h1>
+        <h1 className="max-w-6xl text-6xl font-semibold leading-[0.9] tracking-[-0.06em] text-white md:text-8xl xl:text-[9rem]">
+          Everything
+          <br />
+          your print
+          <br />
+          business needs.
+        </h1>
 
-            {/* Description */}
-            <p className="text-xs font-light text-white/70 mb-4 leading-relaxed max-w-lg">
-                We supply durable flex, vinyl, and printing materials trusted by resellers and branding businesses — delivered fast and at competitive prices.
-            </p>
+        <p className="mt-10 max-w-2xl text-lg leading-relaxed text-neutral-400 md:text-xl">
+          Premium printing materials, machines and accessories trusted by
+          professionals across Nigeria.
+        </p>
 
-            {/* Buttons */}
-            <div className="flex items-center gap-4 flex-wrap">
-                <button className="px-8 py-3 rounded-sm bg-transparent border-primary-foreground border-l-8 border-t-8 border-r-2 border-b-2 border  text-white font-normal text-xs transition-all duration-200 hover:bg-white/10 hover:border-white/50 cursor-pointer">
-                    Pricing
-                </button>
-                <button className="px-8 py-3 rounded-sm bg-white border-primary border-l-2 border-t-2 border-r-8 border-b-8 text-primary font-normal text-xs transition-all duration-200 hover:bg-white/90 cursor-pointer">
-                    Order Now
-                </button>
-            </div>
-            <p className="text-xs text-white mt-2 leading-relaxed">Trusted by <strong>100+ printing businesses</strong></p>
-        </motion.div>
+        <div className="mt-14 flex flex-wrap gap-5">
+          <button className="rounded-full bg-white px-8 py-4 text-sm font-medium text-black transition hover:scale-105">
+            Explore Products
+          </button>
+
+          <button className="rounded-full border border-neutral-700 px-8 py-4 text-sm text-white transition hover:border-white">
+            Request Quote
+          </button>
+        </div>
+      </div>
+
+      <div className="mt-20 flex flex-wrap gap-10  text-sm uppercase tracking-[0.1em] text-neutral-500">
+        {collections.map((collection, index) => {
+          const productName = collection?.name?.split("-");
+          return (
+            <Link
+              className="hover:text-neutral-200 hover:underline transition-all duration-150"
+              href={`#${collection._id}`}
+              key={index}
+            >
+              {productName[0]}
+            </Link>
+          );
+        })}
       </div>
     </main>
-  )
+  );
 }

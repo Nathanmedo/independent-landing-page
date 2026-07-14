@@ -1,16 +1,26 @@
-import { useRef, useState, useEffect } from "react";
+"use client";
+
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { PHONE_NUMBER } from "@/lib/wix-api/constants";
+
+import { toast } from "sonner";
+
 import { Button } from "@/components/ui/button";
+
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
+  FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import { Input } from "@/components/ui/input";
+
 import {
   Select,
   SelectContent,
@@ -18,21 +28,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "sonner";
-import { motion } from "framer-motion";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").max(100),
-  email: z.string().email("Invalid email address").max(255),
-  phone: z.string().min(10, "Phone number must be at least 10 digits").max(20),
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number is too short"),
   subject: z.string().min(1, "Please select an option"),
-  message: z
-    .string()
-    .min(10, "Message must be at least 10 characters")
-    .max(1000),
+  message: z.string().min(10, "Please enter your message"),
 });
 
 export default function ContactForm() {
@@ -40,6 +44,7 @@ export default function ContactForm() {
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
+
     defaultValues: {
       name: "",
       email: "",
@@ -51,10 +56,8 @@ export default function ContactForm() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
+
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log(values);
       const response = await fetch("/api/mail", {
         method: "POST",
         headers: {
@@ -62,208 +65,195 @@ export default function ContactForm() {
         },
         body: JSON.stringify(values),
       });
+
       if (!response.ok) {
-        toast.error("Network response was not ok");
+        throw new Error("Failed");
       }
+
       const data = await response.json();
-      console.log(data)
+
       toast.success(data);
+
       form.reset();
-    } catch (error) {
-      toast.error("Failed to send message. Please try again.");
+    } catch {
+      toast.error("Failed to send message.");
     } finally {
       setIsSubmitting(false);
     }
   }
 
-  const selectOptions = [
-    { value: "general", label: "General Inquiry" },
-    { value: "support", label: "Support" },
-    { value: "sales", label: "Sales" },
-    { value: "partnership", label: "Partnership" },
-    { value: "other", label: "Other" },
-  ];
+  const inputStyle =
+    "h-16 rounded-2xl border border-white/10 bg-white/[0.03] text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
 
-  const fieldRef = useRef<(HTMLElement | null)[]>([]);
-  useEffect(() => {
-    const elements = fieldRef.current.filter((el) => el !== null);
-    if (elements.length === 0) return;
+  const textareaStyle =
+    "min-h-[180px] rounded-2xl border border-white/10 bg-white/[0.03] resize-none text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
 
-    gsap.fromTo(
-      elements,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15, // 150ms delay between each item
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: elements[0], // Trigger when first element comes into view
-          start: "top 80%", // Start when element is 80% down viewport
-          end: "bottom 20%",
-          toggleActions: "play none none reverse", // play on enter, reverse on leave
-          // markers: true, // Uncomment to see trigger points during development
-        },
-      }
-    );
-
-    return () => ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-  }, []);
   return (
-    <div className="w-full mx-auto lg:px-12 px-4 py-16 bg-primary text-primary-foreground">
-      <div className="mb-8">
-        <div className="max-w-3xs">
-          <h1 className="text-5xl font-bold mb-2 tracking-tight italic instrument">
-            Contact Us
-          </h1>
-          <motion.div
-            className="origin-left h-[4px] bg-primary-foreground w-full"
-            initial={{ scaleX: 0 }}
-            viewport={{ amount: 0.2 }}
-            whileInView={{ scaleX: 1 }}
-          ></motion.div>
-        </div>
-        <p className="text-lg text-primary-foreground/80">
-          Fill out the form below, and a member of our team will get back to you
-          as soon as possible
-        </p>
-      </div>
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="space-y-8"
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-neutral-300">
+                  Full Name
+                </FormLabel>
 
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Name"
-                      {...field}
-                      ref={(el) => {
-                        fieldRef.current[0] = el;
-                      }}
-                      className="h-14 text-base placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="email"
-                      placeholder="Email Address"
-                      {...field}
-                      ref={(el) => {
-                        fieldRef.current[1] = el;
-                      }}
-                      className="h-14 text-base placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      type="tel"
-                      placeholder="Phone Number"
-                      {...field}
-                      ref={(el) => {
-                        fieldRef.current[2] = el;
-                      }}
-                      className="h-14 text-base placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="John Doe"
+                    className={inputStyle}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-neutral-300">
+                  Email Address
+                </FormLabel>
+
+                <FormControl>
+                  <Input
+                    type="email"
+                    {...field}
+                    placeholder="john@example.com"
+                    className={inputStyle}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-neutral-300">
+                  Phone Number
+                </FormLabel>
+
+                <FormControl>
+                  <Input
+                    {...field}
+                    placeholder="+234..."
+                    className={inputStyle}
+                  />
+                </FormControl>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
             name="subject"
             render={({ field }) => (
               <FormItem>
+                <FormLabel className="text-neutral-300">
+                  Inquiry Type
+                </FormLabel>
+
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
                 >
-                  <FormControl
-                    ref={(el) => {
-                      fieldRef.current[3] = el;
-                    }}
-                  >
-                    <SelectTrigger className="h-14 text-primary-foreground  placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8">
-                      <SelectValue placeholder="Select an option" />
+                  <FormControl>
+                    <SelectTrigger className={inputStyle}>
+                      <SelectValue placeholder="Select one" />
                     </SelectTrigger>
                   </FormControl>
-                  <SelectContent>
-                    {selectOptions.map((option, index) => (
-                      <SelectItem
-                        key={index}
-                        value={option.value}
-                        className="hover:border-primary hover:border-l-2 hover:border-t-2 hover:border-r-8 hover:border-b-8 border-l-0 border-t-0 border-r-0 border-b-0 transition duration-150"
-                      >
-                        {option.label}
-                      </SelectItem>
-                    ))}
+
+                  <SelectContent className="rounded-2xl border-white/10 bg-[#111] text-white">
+                    <SelectItem value="sales">
+                      Product Purchase
+                    </SelectItem>
+
+                    <SelectItem value="quotation">
+                      Request a Quotation
+                    </SelectItem>
+
+                    <SelectItem value="support">
+                      Product Support
+                    </SelectItem>
+
+                    <SelectItem value="partnership">
+                      Partnership
+                    </SelectItem>
+
+                    <SelectItem value="general">
+                      General Inquiry
+                    </SelectItem>
                   </SelectContent>
                 </Select>
+
                 <FormMessage />
               </FormItem>
             )}
           />
+        </div>
 
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem>
-                <FormControl
-                  ref={(el) => {
-                    fieldRef.current[4] = el as HTMLElement | null;
-                  }}
-                >
-                  <Textarea
-                    placeholder="Type a message..."
-                    className="min-h-[200px] text-base resize-none placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8"
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <FormField
+          control={form.control}
+          name="message"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-neutral-300">
+                Tell us about your project
+              </FormLabel>
 
-          <div className="flex justify-center">
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="px-16 h-14 text-lg font-medium hover:bg-primary-foreground/60  placeholder:text-primary-foreground/70 border-primary-foreground border-l-2 border-t-2 border-r-8 border-b-8"
-            >
-              {isSubmitting ? "Sending..." : "Send"}
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </div>
+              <FormControl>
+                <Textarea
+                  {...field}
+                  className={textareaStyle}
+                  placeholder="Tell us what products you're looking for or how we can help..."
+                />
+              </FormControl>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <Button
+          type="submit"
+          disabled={isSubmitting}
+          className="
+            h-16
+            w-full
+            rounded-full
+            bg-white
+            text-black
+            text-base
+            font-medium
+            transition-all
+            duration-300
+            hover:bg-neutral-200
+            hover:scale-[1.01]
+            active:scale-[0.99]
+          "
+        >
+          {isSubmitting ? "Sending..." : "Send Message →"}
+        </Button>
+      </form>
+      <div>OR call {PHONE_NUMBER}</div>
+    </Form>
   );
 }

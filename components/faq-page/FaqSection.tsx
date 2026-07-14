@@ -1,124 +1,164 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import {
-  Accordion,
-  AccordionItem,
-  AccordionContent,
-  AccordionTrigger,
-} from "../ui/accordion";
+  Shirt,
+  Printer,
+  Building2,
+  GraduationCap,
+  Package,
+  Factory,
+  BadgeCheck,
+  Layers3,
+  ArrowRight,
+} from "lucide-react";
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-gsap.registerPlugin(ScrollTrigger);
 
-export default function FAQSection() {
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+const industries = [
+  {
+    title: "Garment Branding",
+    icon: Shirt,
+  },
+  {
+    title: "Commercial Printing",
+    icon: Printer,
+  },
+  {
+    title: "Corporate Branding",
+    icon: Building2,
+  },
+  {
+    title: "Schools",
+    icon: GraduationCap,
+  },
+  {
+    title: "Print Resellers",
+    icon: Package,
+  },
+  {
+    title: "Manufacturing",
+    icon: Factory,
+  },
+  {
+    title: "Promotional Products",
+    icon: BadgeCheck,
+  },
+  {
+    title: "Large Format",
+    icon: Layers3,
+  },
+];
 
-  useEffect(() => {
-    // Filter out null refs
-    const elements = itemRefs.current.filter(
-      (el): el is HTMLDivElement => el !== null
-    );
-
-    if (elements.length === 0) return;
-
-    // GSAP stagger animation with ScrollTrigger (acts like IntersectionObserver)
-    gsap.fromTo(
-      elements,
-      {
-        opacity: 0,
-        y: 50,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15, // 150ms delay between each item
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: elements[0], // Trigger when first element comes into view
-          start: "top 80%", // Start when element is 80% down viewport
-          end: "bottom 20%",
-          toggleActions: "play none none reverse", // play on enter, reverse on leave
-          // markers: true, // Uncomment to see trigger points during development
-        },
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-    };
-  }, []);
-
-  const faqs = [
-    {
-      question: "What services do you offer?",
-      answer:
-        "We offer a comprehensive range of housing solutions including property management, real estate consultation, and investment advisory services. Our team is dedicated to helping you find the perfect property or manage your existing assets effectively.",
-    },
-    {
-      question: "How long does the process take?",
-      answer:
-        "The timeline varies depending on your specific needs. Typically, property searches take 2-4 weeks, while the complete transaction process can take 30-60 days. We work efficiently to ensure a smooth and timely experience.",
-    },
-    {
-      question: "What are your payment terms?",
-      answer:
-        "We offer flexible payment plans tailored to your needs. Initial consultations are free, and our service fees are transparently communicated upfront. We also provide various payment options including installment plans for eligible clients.",
-    },
-    {
-      question: "Do you provide after-sales support?",
-      answer:
-        "Yes, absolutely! We pride ourselves on our comprehensive after-sales support. This includes property maintenance assistance, documentation help, and ongoing consultation for any questions or concerns you may have.",
-    },
-    {
-      question: "How can I schedule a consultation?",
-      answer:
-        "You can schedule a consultation by filling out our contact form, calling our office directly, or sending us an email. We typically respond within 24 hours and will work with you to find a convenient time for your consultation."
-    }
-  ];
-
-  
+function MarqueeRow({ reverse = false }: { reverse?: boolean }) {
   return (
-    <div className="w-full max-w-4xl mx-auto px-4 py-12">
-      <div className="mb-12 text-center">
-        <div className="max-w-3xs mx-auto mb-4">
-          <h2 className="text-4xl md:text-5xl mb-2 text-primary font-bold tracking-tight instrument italic">
-            Frequently Asked Questions
-          </h2>
-          <motion.div
-            className="origin-left h-[4px] bg-primary w-full"
-            initial={{ scaleX: 0 }}
-            viewport={{ amount: 0.2 }}
-            whileInView={{ scaleX: 1 }}
-          ></motion.div>
-        </div>
-        <p className="text-lg text-muted-foreground">
-          Find answers to common questions about our services
-        </p>
-      </div>
+    <div
+      className={`flex w-max gap-5 ${
+        reverse ? "animate-marquee-reverse" : "animate-marquee"
+      }`}
+    >
+      {[...industries, ...industries].map((industry, index) => {
+        const Icon = industry.icon;
 
-      <Accordion type="single" collapsible className="w-full h-auto space-y-4">
-        {faqs.map((faq, index) => (
-          <AccordionItem
-            key={index}
-            ref={(el) => {
-              itemRefs.current[index] = el;
-            }}
-            value={`item-${index}`}
-            className={`rounded-lg px-6  border-primary border-l-2 border-t-2 border-r-8 border-b-8`}
+        return (
+          <div
+            key={industry.title + index}
+            className="flex items-center gap-4 rounded-full border border-white/10 bg-white/[0.03] px-7 py-4 backdrop-blur-sm transition-all duration-300 hover:border-white/20 hover:bg-white/[0.05]"
           >
-            <AccordionTrigger className="text-left font-semibold text-lg hover:no-underline">
-              {faq.question}
-            </AccordionTrigger>
-            <AccordionContent className="text-base text-muted-foreground pb-6">
-              {faq.answer}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
+            <Icon
+              size={18}
+              className="text-neutral-400
+        transition-all
+        duration-300
+        group-hover:rotate-6
+        group-hover:text-white"
+            />
+
+            <span className="whitespace-nowrap text-sm font-medium tracking-wide text-white">
+              {industry.title}
+            </span>
+          </div>
+        );
+      })}
     </div>
+  );
+}
+
+export default function IndustriesSection() {
+
+  const container = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 35,
+  },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+    },
+  },
+};
+
+
+  return (
+    <section className="overflow-hidden bg-primary/90 py-24">
+      <motion.div
+        className="mx-auto mb-14 max-w-4xl px-6 text-center"
+        variants={container}
+        initial="hidden"
+        whileInView="show"
+        viewport={{
+          once: true,
+          amount: 0.3,
+        }}
+      >
+        <motion.p
+          variants={fadeUp}
+          className="text-xs uppercase tracking-[0.45em] text-neutral-200"
+        >
+          TRUSTED BY
+        </motion.p>
+
+        <motion.h2
+          variants={fadeUp}
+          className="mt-6 text-5xl font-semibold leading-[1em] tracking-[-0.05em] text-white md:text-6xl"
+        >
+          Powering businesses
+          <br />
+          across industries.
+        </motion.h2>
+
+        <motion.p
+          variants={fadeUp}
+          className="mx-auto mt-6 max-w-2xl text-lg text-neutral-400"
+        >
+          From startups to large production facilities, our materials, machinery
+          and accessories support professionals across the printing industry.
+        </motion.p>
+      </motion.div>
+      <div className="relative">
+        {/* Left Fade */}
+
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-40 bg-gradient-to-r from-primary/30 to-transparent" />
+
+        {/* Right Fade */}
+
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-40 bg-gradient-to-l from-primary/30 to-transparent" />
+
+        <MarqueeRow />
+
+        <div className="h-6" />
+
+        <MarqueeRow reverse />
+      </div>
+    </section>
   );
 }
