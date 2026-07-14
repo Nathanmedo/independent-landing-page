@@ -7,7 +7,6 @@ const RootProductPage = async({params}) => {
     const wixClient = getWixClient()
     const productdetail = await getProductBySlug(wixClient, slug);
 
-    console.log(productdetail);
     
   return (
     <>

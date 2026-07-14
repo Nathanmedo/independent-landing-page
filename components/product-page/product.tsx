@@ -43,9 +43,7 @@ function ProductSection() {
   useEffect(() => {
     const fetchData = async () => {
       const wixClient = wixBrowserClient;
-      console.log(wixClient);
       const collections = await getAllCollections(wixClient);
-      console.log("Collections:", collections);
       SetUseCollections(collections);
       setUseActive(collections[0]?.slug || "");
     };

@@ -17,7 +17,16 @@ import {EmailForProduct} from "./emailSeller"
 
 import { ShoppingCartIcon } from "lucide-react";
 
-export function DialogOption({ image, product, selectedOptions }) {
+interface DialogOptionProps{
+  image: {
+    url: string;
+    title: string;
+  };
+  product: any;
+  selectedOptions: any;
+}
+
+export function DialogOption({ image, product, selectedOptions }:DialogOptionProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -48,7 +57,7 @@ export function DialogOption({ image, product, selectedOptions }) {
               <div className="flex flex-col">
                 <div className="text-sm font-semibold">{product?.name}</div>
                 <div className="text-xs text-muted-foreground flex gap-1">
-                  {Object.entries(selectedOptions).map(([key, value]) => (
+                  {Object.entries(selectedOptions as [string, string][]).map(([key, value]) => (
                     <>
                       {key === "color" && (
                         <div className="flex">
@@ -74,7 +83,7 @@ export function DialogOption({ image, product, selectedOptions }) {
           </>
         </DialogDescription>
         <DialogFooter className="shadcn-dialog-footer">
-          <Button variant="primary" size="sm" className="recommended-tag">
+          <Button variant="default" size="sm" className="recommended-tag">
             <Link href={`tel:${SUPPORT_PHONE_NUMBER}`}>Call seller</Link>
           </Button>
           <Button variant="secondary" size="sm">

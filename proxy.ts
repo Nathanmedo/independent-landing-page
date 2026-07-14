@@ -15,7 +15,6 @@ export async function proxy(req:any){
     let sessionToken = sessionCookie ? 
     JSON.parse(sessionCookie.value) : await wixClient.auth.generateVisitorTokens();
 
-    console.log(sessionToken);
     
     if(sessionToken.accessToken.expiresAt < Math.floor(Date.now())){
         try{

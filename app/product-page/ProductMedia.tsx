@@ -27,7 +27,6 @@ const ProductMedia = ({ media }:any) => {
   const [selectedMediaState, setSelectedMedia] = useState(
     media?.[0] || null,
   );
-  console.log(selectedMediaState);
 
   useEffect(()=>{
     setSelectedMedia(media?.[0]);

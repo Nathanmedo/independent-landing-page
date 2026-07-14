@@ -41,7 +41,6 @@ export default function CollectionToolbar({
     return () => clearTimeout(timeout);
   }, [value]);
 
-  console.log(collectionName)
 
   return (
     <section className="mx-auto mb-24 max-w-7xl px-6">

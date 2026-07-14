@@ -7,7 +7,6 @@ export function cn(...inputs: ClassValue[]) {
 
 
 export function getFormattedPrice(product:any){
-  console.log(product);
   
   const minValue = product?.priceRange?.minValue;
   const maxValue = product?.priceRange?.maxValue;
@@ -31,10 +30,8 @@ export function findVariant(products:any, selectedOptions:any){
 
 export function ProductPrice({product, selectedVariant}:{product: any; selectedVariant:any;}){
   const priceOption = selectedVariant?.variant?.priceData || product?.priceData;
-  console.log(priceOption);
   
   const hasDiscount = priceOption?.price !== priceOption?.discountedPrice;
-  console.log(hasDiscount);
   
    return <div className="text-3xl tracking-tight text-white flex-col flex justify-center">
      <span className={cn('bg-muted max-w-fit bg-opacity-50 px-2 py-1 text-white font-extrabold flex items-center', hasDiscount && 'font-normal line-through text-muted-foreground text-sm')}>{priceOption?.formatted?.price}</span>

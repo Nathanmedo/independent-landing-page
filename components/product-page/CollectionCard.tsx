@@ -22,9 +22,7 @@ const CollectionCard = forwardRef<HTMLDivElement, Props>(
     const router = useRouter();
 
     const productUrl = product?.media?.mainMedia?.image?.url;
-    console.log(productUrl);
     const collectionName = product?.name?.split("-");
-    console.log("product", collectionName);
 
     const handleViewCollection = () => {
       router.push(`/collections/${product?.slug}`);

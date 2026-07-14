@@ -21,18 +21,15 @@ export default function ProductDetails({ productInfo }: any) {
       }))
       ?.reduce((acc: any, curr: any) => ({ ...acc, ...curr }), {}) || {},
   );
-  console.log(selectedOptions);
 
   const variant = findVariant(productInfo, selectedOptions);
   const inStock = checkInStock(productInfo, selectedOptions);
-  console.log(inStock);
 
   const avaliableQuantity =
     variant?.stock?.quantity ?? product?.stock?.quantity;
 
   const avaliableQuantityExceeded =
     !!avaliableQuantity && quantity > avaliableQuantity;
-  console.log("avaliableQuantityExceeded", avaliableQuantityExceeded);
 
   const selectedOptionMedia = productInfo.productOptions.flatMap(
     (option: any) => {
@@ -183,7 +180,6 @@ export default function ProductDetails({ productInfo }: any) {
 
 function checkInStock(product: any, selectedOptions: any) {
   const variant = findVariant(product, selectedOptions);
-  console.log(variant);
 
   return variant
     ? variant?.stock?.inStock && variant?.stock?.quantity !== 0

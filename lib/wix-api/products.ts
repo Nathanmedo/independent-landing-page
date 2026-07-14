@@ -6,9 +6,7 @@ export const  getProductBySlug = cache(async(wixClient:any, slug:string) => {
     return null;
   }
 
-  console.log("here 1", slug);
 
-  console.log(wixClient);
 
   //it will return an array.
   let { items } = await wixClient.products
@@ -16,8 +14,6 @@ export const  getProductBySlug = cache(async(wixClient:any, slug:string) => {
     .eq("slug", slug)
     .limit(1)
     .find();
-  console.log(items);
-  console.log("here 2");
 
   if (items.length === 0) {
     throw new Error("No product found with the given slug");

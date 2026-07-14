@@ -17,7 +17,6 @@ const ProductOptions = ({
   checkInStock,
   setSelectedOptions,
 }:ProductOptionsProps) => {
-  console.log(productInfo);
 
   if(productInfo?.productOptions.length == 0){
     return null

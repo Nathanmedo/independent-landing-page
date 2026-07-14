@@ -86,9 +86,7 @@ export default async function CollectionPage({
     },
   );
 
-  console.log(collectionProducts)
   const collectionName = collection?.name?.split("-")[0];
-  console.log(collectionName[0]);
 
   if (page > (collectionProducts?.totalPages || 1)) notFound();
 

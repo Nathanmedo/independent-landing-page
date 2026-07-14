@@ -23,9 +23,7 @@ export default function ShaderShowcase() {
   useEffect(() => {
     async function load() {
       const wixClient = wixBrowserClient;
-      console.log(wixClient);
       const collections = await getAllCollections(wixClient);
-      console.log("Collections:", collections);
       setCollections(collections);
       setActiveIndex(collections[0]?.slug || "");
     }

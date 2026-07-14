@@ -10,7 +10,7 @@ export const getWixServerClient = cache(async() => {
     try{
         tokens = JSON.parse((await cookies()).get(WIX_COOKIE_TOKEN)?.value || '');
     }catch(error){
-        console.log(error);
+        return;
         
     }
 
