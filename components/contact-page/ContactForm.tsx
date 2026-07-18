@@ -83,10 +83,10 @@ export default function ContactForm() {
   }
 
   const inputStyle =
-    "h-16 rounded-2xl border border-white/10 bg-white/[0.03] text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
+    "h-12  border border-white/10 rounded-none bg-white/[0.03] text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
 
   const textareaStyle =
-    "min-h-[180px] rounded-2xl border border-white/10 bg-white/[0.03] resize-none text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
+    "min-h-[180px]  border border-white/10 rounded-none bg-white/[0.03] resize-none text-white placeholder:text-neutral-500 transition-all duration-300 focus:border-white/30 focus:bg-white/[0.05] focus-visible:ring-0";
 
   return (
     <Form {...form}>
@@ -107,7 +107,7 @@ export default function ContactForm() {
                 <FormControl>
                   <Input
                     {...field}
-                    placeholder="John Doe"
+                    placeholder="Mr Emeka"
                     className={inputStyle}
                   />
                 </FormControl>
@@ -181,7 +181,7 @@ export default function ContactForm() {
                     </SelectTrigger>
                   </FormControl>
 
-                  <SelectContent className="rounded-2xl border-white/10 bg-[#111] text-white">
+                  <SelectContent className=" border-white/10 bg-[#111] text-white">
                     <SelectItem value="sales">
                       Product Purchase
                     </SelectItem>
@@ -236,9 +236,9 @@ export default function ContactForm() {
           type="submit"
           disabled={isSubmitting}
           className="
-            h-16
+            h-12
             w-full
-            rounded-full
+            
             bg-white
             text-black
             text-base

@@ -37,10 +37,10 @@ const CollectionCard = forwardRef<HTMLDivElement, Props>(
             : "opacity-0 pointer-events-none"
         }`}
       >
-        <div className="mx-auto flex h-full max-w-7xl flex-col-reverse items-center justify-between px-6 py-12 sm:px-8 lg:h-full lg:flex-row lg:px-20 lg:py-0">
+        <div className="mx-auto flex h-full max-w-7xl flex-col-reverse items-center justify-center md:justify-between px-6 py-12 sm:px-8 lg:h-full lg:flex-row lg:px-20 lg:py-0">
           {/* LEFT */}
 
-          <div className="w-full flex md:items-start-start items-center flex-col text-center lg:w-[50%] lg:text-left">
+          <div className="w-full flex md:items-start items-center flex-col text-center lg:w-[50%] lg:text-left">
             <p className="product-number mb-6 text-sm uppercase tracking-[.5em] text-white lg:mb-8">
               {String(index + 1).padStart(2, "0")}
             </p>
@@ -72,10 +72,12 @@ const CollectionCard = forwardRef<HTMLDivElement, Props>(
               src={productUrl}
               alt={product.name}
               fill
-              sizes="100%"
+              sizes="(min-width: 1024px) 44vw, 100vw"
               priority
-              className={`product-image object-contain transition-all duration-700 ${
-                active ? "scale-100 opacity-100" : "scale-90 opacity-0 blur-md"
+              className={`product-image object-contain transition-all duration-500 ease-out ${
+                active
+                  ? "scale-100 opacity-100"
+                  : "scale-[0.97] opacity-0"
               }`}
             />
           </div>

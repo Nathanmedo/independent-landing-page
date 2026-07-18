@@ -105,7 +105,7 @@ export default function ContactSection() {
             transition={{
               duration: 0.8,
             }}
-            className="rounded-[32px] border border-white/10 bg-white/[0.03] p-10 backdrop-blur-sm"
+            className=" border border-white/10 bg-white/[0.03] p-10 backdrop-blur-sm"
           >
             <ContactForm />
           </motion.div>
@@ -122,7 +122,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+                <p className="text-sm uppercase tracking-[0.2em] text-neutral-200">
                   Phone
                 </p>
 
@@ -139,7 +139,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+                <p className="text-sm uppercase tracking-[0.2em] text-neutral-200">
                   Email
                 </p>
 
@@ -155,7 +155,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+                <p className="text-sm uppercase tracking-[0.2em] text-neutral-200">
                   Visit Us
                 </p>
 
@@ -175,7 +175,7 @@ export default function ContactSection() {
               </div>
 
               <div>
-                <p className="text-sm uppercase tracking-[0.2em] text-neutral-500">
+                <p className="text-sm uppercase tracking-[0.2em] text-neutral-200">
                   Business Hours
                 </p>
 

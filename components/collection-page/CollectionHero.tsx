@@ -10,6 +10,8 @@ interface CollectionHeroProps {
     description?: string | null;
     numberOfProducts?: number | null;
   };
+  collectionName: string;
+  collectionDescription: string;
 }
 
 const container = {
@@ -37,6 +39,8 @@ const fadeUp = {
 
 export default function CollectionHero({
   collection,
+  collectionName,
+  collectionDescription
 }: CollectionHeroProps) {
   return (
     <motion.section
@@ -46,41 +50,31 @@ export default function CollectionHero({
       className="mx-auto max-w-7xl px-6 pt-24 md:pb-20 pb-10"
     >
       <div
-        className="text-xs flex items-center gap-2 uppercase tracking-[0.45em] text-neutral-200"
+        className="text-xs  uppercase tracking-[0.45em] text-neutral-200"
       >
 
-        <Link href="/">
+        <Link href="/" className="flex items-center gap-2">
         <ArrowLeftIcon className="text-sm" />
-        </Link>
         <motion.span
         variants={fadeUp}>Collection</motion.span>
+        </Link>
       </div>
 
       <motion.h1
         variants={fadeUp}
         className="mt-6 text-6xl font-semibold leading-[0.9] tracking-[-0.06em] text-white md:text-8xl"
       >
-        {collection.name}
+        {collectionName}
       </motion.h1>
 
       <motion.p
         variants={fadeUp}
         className="mt-8 max-w-2xl text-xl leading-relaxed text-neutral-200"
       >
-        {collection.description ||
+        {collectionDescription ||
           "Explore premium products curated for professionals."}
       </motion.p>
 
-      <motion.div
-        variants={fadeUp}
-        className="mt-12 flex items-center gap-6"
-      >
-        <div className="h-px w-24 bg-white/80" />
-
-        <span className="text-sm uppercase tracking-[0.3em] text-neutral-200">
-          {collection.numberOfProducts ?? 0} Products
-        </span>
-      </motion.div>
     </motion.section>
   );
 }

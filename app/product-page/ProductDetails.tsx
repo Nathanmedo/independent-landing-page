@@ -47,8 +47,8 @@ export default function ProductDetails({ productInfo }: any) {
   const productImage = productInfo?.media?.mainMedia?.image;
 
   return (
-    <div className="bg-primary/95 min-h-screen">
-      <div className="mx-auto  max-w-7xl px-4 pt-28 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
+    <div className="bg-primary/95 min-h-screen ">
+      <div className="mx-auto  max-w-7xl px-4 pt-20 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
         <div className="mb-10">
           <button
             onClick={() => router.back()}

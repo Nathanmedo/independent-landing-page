@@ -88,16 +88,23 @@ export default async function CollectionPage({
     },
   );
 
-  const collectionName = collection?.name?.split("-")[0];
+  const collectionInfo = collection?.name?.split("-");
 
   if (page > (collectionProducts?.totalPages || 1)) notFound();
 
   if (collectionProducts._items.length === 0) {
     return (
       <section className="bg-primary/95">
-        <CollectionHero collection={collection} />
+        <CollectionHero
+          collection={collection}
+          collectionName={collectionInfo[0]}
+          collectionDescription={collectionInfo[1]}
+        />
 
-        <CollectionToolbar totalProducts={0} collectionName={collectionName} />
+        <CollectionToolbar
+          totalProducts={0}
+          collectionName={collectionInfo[0]}
+        />
 
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-center px-6 pb-32 pt-10 text-center">
           <h2 className="text-4xl font-semibold tracking-[-0.04em] text-white">
@@ -115,11 +122,15 @@ export default async function CollectionPage({
 
   return (
     <section className="bg-primary/95">
-      <CollectionHero collection={collection} />
+      <CollectionHero
+        collection={collection}
+        collectionName={collectionInfo[0]}
+        collectionDescription={collectionInfo[1]}
+      />
 
       <CollectionToolbar
         totalProducts={collectionProducts.totalCount ?? 0}
-        collectionName={collectionName}
+        collectionName={collectionInfo[0]}
       />
 
       <div className="container mx-auto px-4 pt-2 pb-16">

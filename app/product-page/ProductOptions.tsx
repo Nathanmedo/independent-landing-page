@@ -46,7 +46,7 @@ const ProductOptions = ({
                     }
                   />
                   <label 
-                  className={cn("cursor-pointer transition duration-100 ease-in gap-1 items-center justify-center flex border-2 peer-checked:font-bold text-sm peer-checked:border-neutral-600 px-2 py-1 ", !checkInStock(productInfo, selectedOptions) && 'opacity-75')}
+                  className={cn("cursor-pointer border-neutral-600 transition duration-100 ease-in gap-1 items-center justify-center flex border-2 peer-checked:font-bold text-sm peer-checked:border-neutral-200 px-2 py-1 ", !checkInStock(productInfo, selectedOptions) && 'opacity-75')}
                   htmlFor={choice?.description}>
                     {options.optionType === products.OptionType.color &&
                       <span
