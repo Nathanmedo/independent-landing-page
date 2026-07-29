@@ -45,9 +45,10 @@ export default function ProductDetails({ productInfo }: any) {
   );
 
   const productImage = productInfo?.media?.mainMedia?.image;
+  console.log("description",productInfo.description)
 
   return (
-    <div className="bg-primary/95 min-h-screen ">
+    <div className="bg-primary/95 min-h-screen pb-6">
       <div className="mx-auto  max-w-7xl px-4 pt-20 sm:px-6 sm:py-32 lg:px-8 lg:pt-32">
         <div className="mb-10">
           <button
@@ -150,17 +151,17 @@ export default function ProductDetails({ productInfo }: any) {
               >
                 <div className="mt-6">
                   <h3 className="sr-only">Description</h3>
-                  <div
+                  {productInfo?.description ? <div
                     className="text-sm"
                     dangerouslySetInnerHTML={{
                       __html: productInfo?.description,
                     }}
-                  />
+                  /> : <div>Further description of the product will be displayed here.</div>}
                 </div>
               </TabsContent>
               <TabsContent value="details" className="mt-4 text-neutral-200">
                 <div className="space-y-2 text-sm">
-                  {productInfo?.additionalInfoSections.map(
+                  {productInfo?.additionalInfoSections.length !==0 ? (productInfo?.additionalInfoSections.map(
                     (eachSection: any, i: number) => (
                       <div key={i}>
                         <h1 className="">{eachSection.title}</h1>
@@ -171,7 +172,7 @@ export default function ProductDetails({ productInfo }: any) {
                         />
                       </div>
                     ),
-                  )}
+                  )): <div>Further details of the product will be displayed here.</div>}
                 </div>
               </TabsContent>
               <TabsContent
